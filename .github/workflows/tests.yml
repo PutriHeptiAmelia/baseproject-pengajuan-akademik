@@ -59,4 +59,10 @@ jobs:
         run: composer setup
 
       - name: Run CI Checks
-        run: composer ci:check
+        run: |
+          npm run check
+          npm run types:check
+          php vendor/bin/pint --test
+          php vendor/bin/phpstan analyse
+          php artisan migrate:fresh --seed --force
+          php artisan test --testsuite=Unit
