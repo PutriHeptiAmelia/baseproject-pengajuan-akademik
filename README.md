@@ -120,4 +120,4 @@ Bentuk arsitektur yang dipilih adalah Monolit Inertia (Laravel + React).
    Vivian Rizkiana Fauzi (2415061002)
 
 5. Uji Kebergunaan dan Dokumentasi (PDF, README, halaman arsitektur, calon pengguna, skenario uji):
-   Yaza Nur Zahira (2415061000)
+   Yaza Nur Zahira (2415061032)
