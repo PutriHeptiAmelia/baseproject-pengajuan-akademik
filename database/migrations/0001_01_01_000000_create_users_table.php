@@ -2,30 +2,27 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name', 150);
             $table->string('email', 150)->unique();
-            $table->string('password');
-            $table->string('nomor_induk', 20)->unique();
-            $table->string('role', 20);
+            $table->string('password', 255);
+            $table->string('nomor_induk', 20)->unique()->nullable();
+            $table->string('role', 20)->default('mahasiswa');
             $table->string('phone', 20)->nullable();
             $table->foreignId('dosen_pa_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->timestampTz('email_verified_at')->nullable();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestampsTz();
         });
 
-        // Batasan agar kolom role hanya berisi nilai yang valid
         DB::statement("ALTER TABLE users ADD CONSTRAINT chk_users_role CHECK (role IN ('mahasiswa', 'dosen_pa', 'kaprodi', 'staff_akademik'))");
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -44,9 +41,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('sessions');

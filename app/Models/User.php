@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -34,7 +36,10 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
  * @property-read Collection<int, Membership> $teamMemberships
  * @property-read Collection<int, Team> $teams
  */
-#[Fillable(['name', 'email', 'password', 'current_team_id'])]
+#[Fillable(['name', 'email', 'password', 'current_team_id', 'nomor_induk',
+    'role',
+    'phone',
+    'dosen_pa_id', ])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
 {
@@ -53,5 +58,45 @@ class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
         ];
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function dosenPa(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'dosen_pa_id');
+    }
+
+    /**
+     * @return HasMany<User, $this>
+     */
+    public function mahasiswaBimbingan(): HasMany
+    {
+        return $this->hasMany(User::class, 'dosen_pa_id');
+    }
+
+    /**
+     * @return HasMany<Pengajuan, $this>
+     */
+    public function pengajuan(): HasMany
+    {
+        return $this->hasMany(Pengajuan::class, 'user_id');
+    }
+
+    /**
+     * @return HasMany<Persetujuan, $this>
+     */
+    public function persetujuan(): HasMany
+    {
+        return $this->hasMany(Persetujuan::class, 'approver_id');
+    }
+
+    /**
+     * @return HasMany<RiwayatStatus, $this>
+     */
+    public function riwayatStatus(): HasMany
+    {
+        return $this->hasMany(RiwayatStatus::class, 'diubah_oleh');
     }
 }
