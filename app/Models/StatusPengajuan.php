@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class StatusPengajuan extends Model
 {
     protected $table = 'status_pengajuan';
+
     public $timestamps = false;
 
     protected $fillable = [

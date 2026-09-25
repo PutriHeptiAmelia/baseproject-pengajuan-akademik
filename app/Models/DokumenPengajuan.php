@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class DokumenPengajuan extends Model
 {
     protected $table = 'dokumen_pengajuan';
+
     const UPDATED_AT = null;
 
     protected $fillable = [

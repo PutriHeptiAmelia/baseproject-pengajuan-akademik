@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class RiwayatStatus extends Model
 {
     protected $table = 'riwayat_status';
+
     const UPDATED_AT = null;
 
     protected $fillable = [

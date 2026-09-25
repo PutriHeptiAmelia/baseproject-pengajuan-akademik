@@ -2,13 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\JenisLayanan;
-use App\Models\StatusPengajuan;
-use App\Models\Pengajuan;
 use App\Models\DokumenPengajuan;
-use App\Models\Persetujuan;
+use App\Models\JenisLayanan;
+use App\Models\Pengajuan;
 use App\Models\RiwayatStatus;
+use App\Models\StatusPengajuan;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 

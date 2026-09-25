@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestampTz('created_at')->useCurrent();
         });
 
-        DB::statement("ALTER TABLE dokumen_pengajuan ADD CONSTRAINT chk_dokumen_ukuran CHECK (ukuran_file >= 0)");
+        DB::statement('ALTER TABLE dokumen_pengajuan ADD CONSTRAINT chk_dokumen_ukuran CHECK (ukuran_file >= 0)');
     }
 
     public function down(): void
