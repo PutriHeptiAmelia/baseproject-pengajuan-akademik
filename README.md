@@ -90,7 +90,7 @@ Seluruh akun contoh di bawah ini menggunakan password yang sama, yaitu: `passwor
 - **Mahasiswa**
   Nama: Kholifah Wulandari
   Email: kholifah.wulandari@students.unila.ac.id
-  NIM: 2415061099
+  NPM: 2415061099
 
 - **Dosen Pembimbing Akademik (PA)**
   Nama: Ir. Gigih Forda Nama, S.T., M.T.I., IPM
