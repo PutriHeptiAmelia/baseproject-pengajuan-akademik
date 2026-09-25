@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DokumenPengajuan extends Model
 {
-    protected $table = 'dokumen_pengajuan';
-
     const UPDATED_AT = null;
+
+    protected $table = 'dokumen_pengajuan';
 
     protected $fillable = [
         'pengajuan_id',
@@ -19,6 +19,9 @@ class DokumenPengajuan extends Model
         'ukuran_file',
     ];
 
+    /**
+     * @return BelongsTo<Pengajuan, $this>
+     */
     public function pengajuan(): BelongsTo
     {
         return $this->belongsTo(Pengajuan::class, 'pengajuan_id');

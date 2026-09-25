@@ -27,16 +27,25 @@ class Persetujuan extends Model
         ];
     }
 
+    /**
+     * @return BelongsTo<Pengajuan, $this>
+     */
     public function pengajuan(): BelongsTo
     {
         return $this->belongsTo(Pengajuan::class, 'pengajuan_id');
     }
 
+    /**
+     * @return BelongsTo<User, $this>
+     */
     public function approver(): BelongsTo
     {
         return $this->belongsTo(User::class, 'approver_id');
     }
 
+    /**
+     * @return BelongsTo<StatusPengajuan, $this>
+     */
     public function statusPengajuan(): BelongsTo
     {
         return $this->belongsTo(StatusPengajuan::class, 'status_pengajuan_id');

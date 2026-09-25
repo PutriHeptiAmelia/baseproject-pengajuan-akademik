@@ -17,11 +17,17 @@ class StatusPengajuan extends Model
         'urutan',
     ];
 
+    /**
+     * @return HasMany<Pengajuan, $this>
+     */
     public function pengajuan(): HasMany
     {
         return $this->hasMany(Pengajuan::class, 'status_pengajuan_id');
     }
 
+    /**
+     * @return HasMany<Persetujuan, $this>
+     */
     public function persetujuan(): HasMany
     {
         return $this->hasMany(Persetujuan::class, 'status_pengajuan_id');

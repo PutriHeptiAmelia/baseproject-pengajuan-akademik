@@ -23,6 +23,9 @@ class JenisLayanan extends Model
         ];
     }
 
+    /**
+     * @return HasMany<Pengajuan, $this>
+     */
     public function pengajuan(): HasMany
     {
         return $this->hasMany(Pengajuan::class, 'jenis_layanan_id');
