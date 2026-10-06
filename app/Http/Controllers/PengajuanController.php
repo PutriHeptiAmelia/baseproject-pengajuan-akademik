@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Controllers; // atau namespace App\Http\Controllers; sesuai bawaan proyek
-
 namespace App\Http\Controllers;
 
 use App\Models\JenisLayanan;
 use App\Models\Pengajuan;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class PengajuanController extends Controller
 {
     // Week 5: Menampilkan daftar pengajuan dalam bentuk React (Inertia)
-    public function index()
+    public function index(): Response
     {
         $pengajuans = Pengajuan::with(['pemohon', 'jenisLayanan', 'status'])->latest()->get();
 
@@ -22,7 +23,7 @@ class PengajuanController extends Controller
     }
 
     // Week 4: Menampilkan form tambah (Blade)
-    public function create()
+    public function create(): View
     {
         $jenisLayanans = JenisLayanan::where('is_active', true)->get();
 
@@ -30,7 +31,7 @@ class PengajuanController extends Controller
     }
 
     // Week 4: Menyimpan data baru
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'jenis_layanan_id' => 'required|exists:jenis_layanan,id',
@@ -49,7 +50,7 @@ class PengajuanController extends Controller
     }
 
     // Week 5: Menampilkan detail pengajuan via React
-    public function show(Pengajuan $pengajuan)
+    public function show(Pengajuan $pengajuan): Response
     {
         $pengajuan->load(['pemohon', 'jenisLayanan', 'status', 'dokumen', 'persetujuan']);
 
