@@ -8,6 +8,7 @@ Pengajuan -> Verifikasi Dosen PA -> Persetujuan Kaprodi -> Pemrosesan Staff Akad
 ## Prasyarat Sistem
 
 Sebelum menjalankan proyek, pastikan perangkat lokal sudah terpasang:
+
 - PHP 8.3 ke atas (dengan ekstensi pdo_pgsql aktif)
 - Composer
 - Node.js dan npm
@@ -32,12 +33,14 @@ Sebelum menjalankan proyek, pastikan perangkat lokal sudah terpasang:
 
 3. Salin file konfigurasi lingkungan (.env):
 
-   Untuk pengguna Windows (CMD):
+    Untuk pengguna Windows (CMD):
+
 ```
    copy .env.example .env
 ```
 
-   Untuk pengguna Mac / Linux / Git Bash:
+Untuk pengguna Mac / Linux / Git Bash:
+
 ```
    cp .env.example .env
 ```
