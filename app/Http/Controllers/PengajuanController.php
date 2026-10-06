@@ -4,8 +4,8 @@ namespace App\Controllers; // atau namespace App\Http\Controllers; sesuai bawaan
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengajuan;
 use App\Models\JenisLayanan;
+use App\Models\Pengajuan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,7 +17,7 @@ class PengajuanController extends Controller
         $pengajuans = Pengajuan::with(['pemohon', 'jenisLayanan', 'status'])->latest()->get();
 
         return Inertia::render('Pengajuan/Index', [
-            'pengajuans' => $pengajuans
+            'pengajuans' => $pengajuans,
         ]);
     }
 
@@ -25,6 +25,7 @@ class PengajuanController extends Controller
     public function create()
     {
         $jenisLayanans = JenisLayanan::where('is_active', true)->get();
+
         return view('pengajuan.create', compact('jenisLayanans'));
     }
 
@@ -37,7 +38,7 @@ class PengajuanController extends Controller
         ]);
 
         Pengajuan::create([
-            'nomor_pengajuan' => 'PJN-' . date('Y') . '-' . rand(100000, 999999),
+            'nomor_pengajuan' => 'PJN-'.date('Y').'-'.rand(100000, 999999),
             'user_id' => auth()->id(), // Mengambil id user yang sedang login
             'jenis_layanan_id' => $request->jenis_layanan_id,
             'status_pengajuan_id' => 1, // Status awal: Menunggu Verifikasi Dosen PA
@@ -53,7 +54,7 @@ class PengajuanController extends Controller
         $pengajuan->load(['pemohon', 'jenisLayanan', 'status', 'dokumen', 'persetujuan']);
 
         return Inertia::render('Pengajuan/Show', [
-            'pengajuan' => $pengajuan
+            'pengajuan' => $pengajuan,
         ]);
     }
 }
