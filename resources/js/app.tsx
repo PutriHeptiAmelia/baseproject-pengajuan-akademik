@@ -17,7 +17,6 @@ void createInertiaApp({
             case name.startsWith('auth/'):
                 return AuthLayout;
             case name.startsWith('settings/'):
-            case name.startsWith('teams/'):
                 return [AppLayout, SettingsLayout];
             default:
                 return AppLayout;
@@ -37,5 +36,4 @@ void createInertiaApp({
     },
 });
 
-// This will set light / dark mode on load...
 initializeTheme();
