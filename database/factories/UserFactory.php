@@ -2,8 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enums\TeamRole;
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -32,28 +30,10 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
-            'two_factor_secret' => null,
-            'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null,
+            'nomor_induk' => fake()->unique()->numerify('##########'),
+            'role' => 'mahasiswa',
+            'phone' => fake()->numerify('08##########'),
         ];
-    }
-
-    /**
-     * Configure the model factory.
-     */
-    public function configure(): static
-    {
-        return $this->afterCreating(function ($user) {
-            $team = Team::factory()->personal()->create([
-                'name' => $user->name."'s Team",
-            ]);
-
-            $team->members()->attach($user, [
-                'role' => TeamRole::Owner->value,
-            ]);
-
-            $user->switchTeam($team);
-        });
     }
 
     /**
@@ -66,15 +46,26 @@ class UserFactory extends Factory
         ]);
     }
 
-    /**
-     * Indicate that the model has two-factor authentication configured.
-     */
-    public function withTwoFactor(): static
+    public function mahasiswa(): static
+    {
+        return $this->state(fn (array $attributes) => ['role' => 'mahasiswa']);
+    }
+
+    public function dosenPa(): static
+    {
+        return $this->state(fn (array $attributes) => ['role' => 'dosen_pa']);
+    }
+
+    public function kaprodi(): static
+    {
+        return $this->state(fn (array $attributes) => ['role' => 'kaprodi']);
+    }
+
+    public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'two_factor_secret' => encrypt('secret'),
-            'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
-            'two_factor_confirmed_at' => now(),
+            'role' => 'admin',
+            'nomor_induk' => null,
         ]);
     }
 }
