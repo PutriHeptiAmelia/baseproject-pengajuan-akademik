@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JenisLayanan extends Model
 {
+    /** @use HasFactory<\Database\Factories\JenisLayananFactory> */
     use HasFactory;
 
     protected $table = 'jenis_layanan';

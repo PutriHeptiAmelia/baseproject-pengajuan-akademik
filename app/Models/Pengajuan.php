@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Pengajuan extends Model
 {
+    /** @use HasFactory<\Database\Factories\PengajuanFactory> */
     use HasFactory;
 
     protected $table = 'pengajuan';

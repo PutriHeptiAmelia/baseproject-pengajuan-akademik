@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StatusPengajuan extends Model
 {
+    /** @use HasFactory<\Database\Factories\StatusPengajuanFactory> */
     use HasFactory;
 
     protected $table = 'status_pengajuan';
