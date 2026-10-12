@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Database\Factories\JenisLayananFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JenisLayanan extends Model
 {
-    /** @use HasFactory<\Database\Factories\JenisLayananFactory> */
+    /** @use HasFactory<JenisLayananFactory> */
     use HasFactory;
 
     protected $table = 'jenis_layanan';
