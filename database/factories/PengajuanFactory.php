@@ -18,7 +18,7 @@ class PengajuanFactory extends Factory
     public function definition(): array
     {
         return [
-            'nomor_pengajuan' => 'PJN-' . date('Y') . '-' . fake()->unique()->numerify('######'),
+            'nomor_pengajuan' => 'PJN-'.date('Y').'-'.fake()->unique()->numerify('######'),
             'user_id' => User::factory()->mahasiswa(),
             'jenis_layanan_id' => JenisLayanan::factory(),
             'status_pengajuan_id' => StatusPengajuan::factory(),
