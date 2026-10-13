@@ -2,11 +2,16 @@
 
 namespace App\Models;
 
+use Database\Factories\StatusPengajuanFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StatusPengajuan extends Model
 {
+    /** @use HasFactory<StatusPengajuanFactory> */
+    use HasFactory;
+
     protected $table = 'status_pengajuan';
 
     public $timestamps = false;

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestampsTz();
         });
 
-        DB::statement("ALTER TABLE users ADD CONSTRAINT chk_users_role CHECK (role IN ('mahasiswa', 'dosen_pa', 'kaprodi', 'staff_akademik'))");
+        DB::statement("ALTER TABLE users ADD CONSTRAINT chk_users_role CHECK (role IN ('mahasiswa', 'dosen_pa', 'kaprodi', 'admin'))");
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
