@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 'name' => 'Indrawati',
                 'password' => Hash::make('password'),
                 'nomor_induk' => null,
-                'role' => 'staff_akademik',
+                'role' => 'admin',
                 'phone' => '081200000004',
                 'email_verified_at' => now(),
             ]

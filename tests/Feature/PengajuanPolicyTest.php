@@ -32,8 +32,8 @@ it('kaprodi bisa lihat semua pengajuan', function () {
     expect($kaprodi->can('view', $pengajuan))->toBeTrue();
 });
 
-it('staff akademik bisa lihat semua pengajuan', function () {
-    $staff = User::factory()->create(['role' => 'staff_akademik']);
+it('admin bisa lihat semua pengajuan', function () {
+    $staff = User::factory()->create(['role' => 'admin']);
     $pengajuan = Pengajuan::factory()->create();
 
     expect($staff->can('view', $pengajuan))->toBeTrue();
@@ -79,7 +79,7 @@ it('dosen pa tidak bisa approve pengajuan bukan bimbingannya', function () {
 });
 
 it('staff akademik bisa approve semua pengajuan', function () {
-    $staff = User::factory()->create(['role' => 'staff_akademik']);
+    $staff = User::factory()->create(['role' => 'admin']);
     $pengajuan = Pengajuan::factory()->create();
 
     expect($staff->can('approve', $pengajuan))->toBeTrue();

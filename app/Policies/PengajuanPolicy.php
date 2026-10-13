@@ -16,7 +16,7 @@ class PengajuanPolicy
             'mahasiswa',
             'dosen_pa',
             'kaprodi',
-            'staff_akademik',
+            'admin',
         ]);
     }
 
@@ -36,8 +36,8 @@ class PengajuanPolicy
                 && $pengajuan->pemohon->dosen_pa_id === $user->id;
         }
 
-        // Kaprodi & staff akademik: boleh lihat semua
-        return in_array($user->role, ['kaprodi', 'staff_akademik']);
+        // Kaprodi & admin: boleh lihat semua
+        return in_array($user->role, ['kaprodi', 'admin']);
     }
 
     /**
@@ -84,8 +84,8 @@ class PengajuanPolicy
                 && $pengajuan->pemohon->dosen_pa_id === $user->id;
         }
 
-        // Kaprodi & staff akademik: boleh approve semua
-        return in_array($user->role, ['kaprodi', 'staff_akademik']);
+        // Kaprodi & admin: boleh approve semua
+        return in_array($user->role, ['kaprodi', 'admin']);
     }
 
     /**
