@@ -35,6 +35,21 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     /**
+     * @var list<string>
+     */
+    protected $appends = [
+        'nim',
+    ];
+
+    /**
+     * Get the user's nim/npm attribute.
+     */
+    public function getNimAttribute(): ?string
+    {
+        return $this->nomor_induk;
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

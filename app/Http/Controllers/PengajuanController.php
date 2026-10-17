@@ -13,12 +13,22 @@ use Inertia\Response;
 class PengajuanController extends Controller
 {
     // Week 5: Menampilkan daftar pengajuan dalam bentuk React (Inertia)
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $pengajuans = Pengajuan::with(['pemohon', 'jenisLayanan', 'status'])->latest()->get();
+        $user = $request->user();
+        $query = Pengajuan::with(['pemohon', 'jenisLayanan', 'status'])->latest();
+
+        if ($user && $user->role === 'mahasiswa') {
+            $query->where('user_id', $user->id);
+        } elseif ($user && $user->role === 'dosen_pa') {
+            $query->whereHas('pemohon', fn ($q) => $q->where('dosen_pa_id', $user->id));
+        }
+
+        $pengajuans = $query->get();
 
         return Inertia::render('Pengajuan/Index', [
             'pengajuans' => $pengajuans,
+            'role' => $user?->role ?? 'mahasiswa',
         ]);
     }
 
@@ -52,7 +62,7 @@ class PengajuanController extends Controller
     // Week 5: Menampilkan detail pengajuan via React
     public function show(Pengajuan $pengajuan): Response
     {
-        $pengajuan->load(['pemohon', 'jenisLayanan', 'status', 'dokumen', 'persetujuan']);
+        $pengajuan->load(['pemohon', 'jenisLayanan', 'status', 'dokumen', 'persetujuan.approver']);
 
         return Inertia::render('Pengajuan/Show', [
             'pengajuan' => $pengajuan,
