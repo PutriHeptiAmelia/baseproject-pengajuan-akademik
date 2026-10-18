@@ -52,8 +52,7 @@
         }
     </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-2xl mx-auto">
+    <body class="bg-[#020817] text-slate-200 font-sans antialiased min-h-screen py-8 px-4 sm:px-6 lg:px-8">    <div class="max-w-2xl mx-auto">
         <!-- Header Navigasi -->
         <div class="mb-6 flex items-center justify-between">
             <a href="{{ route('pengajuan.index') }}" class="inline-flex items-center gap-2 text-sm font-bold text-academic-600 hover:text-academic-700 hover:-translate-x-1 transition-transform">
@@ -69,8 +68,7 @@
         </div>
 
         <!-- Main Card -->
-        <div class="bg-white rounded-3xl shadow-sm border border-slate-200/90 overflow-hidden">
-            <!-- Header Banner -->
+        <div class="bg-[#0f172a] rounded-3xl shadow-lg border border-slate-800 overflow-hidden">            <!-- Header Banner -->
             <div class="relative bg-gradient-to-r from-academic-900 via-academic-700 to-academic-600 text-white p-6 sm:p-8 overflow-hidden">
                 <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/5 blur-xl"></div>
                 <div class="relative z-10 flex items-center gap-4">
@@ -89,8 +87,7 @@
             </div>
 
             <!-- Petunjuk Singkat -->
-            <div class="bg-academic-50/70 border-b border-academic-100 p-4 sm:px-8 text-xs text-academic-700 flex items-start gap-3">
-                <div class="w-5 h-5 rounded-full bg-academic-100 flex items-center justify-center shrink-0 text-academic-700 font-bold text-xs mt-0.5">
+                <div class="bg-blue-500/10 border-b border-blue-500/20 p-4 sm:px-8 text-xs text-blue-400 flex items-start gap-3">                <div class="w-5 h-5 rounded-full bg-academic-100 flex items-center justify-center shrink-0 text-academic-700 font-bold text-xs mt-0.5">
                     i
                 </div>
                 <span class="leading-relaxed">
@@ -104,14 +101,12 @@
 
                 <!-- Jenis Layanan -->
                 <div>
-                    <label for="jenis_layanan_id" class="block text-sm font-bold text-slate-800 mb-2">
-                        Pilih Kategori Layanan <span class="text-red-500">*</span>
+                    <label for="jenis_layanan_id" class="block text-sm font-bold text-slate-200 mb-2">                        Pilih Kategori Layanan <span class="text-red-500">*</span>
                     </label>
                     <select
                         id="jenis_layanan_id"
                         name="jenis_layanan_id"
-                        class="w-full border border-slate-300 rounded-2xl p-3.5 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-academic-500/15 focus:border-academic-500 bg-white transition duration-200 cursor-pointer shadow-2xs @error('jenis_layanan_id') border-red-500 ring-2 ring-red-500/20 @enderror"
-                        required
+                        class="w-full border border-slate-700 rounded-2xl p-3.5 text-sm font-medium focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 bg-[#020817] text-white transition duration-200 cursor-pointer shadow-2xs @error('jenis_layanan_id') border-red-500 ring-2 ring-red-500/20 @enderror"                        required
                     >
                         <option value="">-- Klik untuk memilih jenis layanan --</option>
                         @foreach($jenisLayanans as $layanan)
@@ -132,15 +127,13 @@
 
                 <!-- Keterangan / Keperluan -->
                 <div>
-                    <label for="keterangan" class="block text-sm font-bold text-slate-800 mb-2">
-                        Keterangan / Keperluan Tambahan
+                    <label for="keterangan" class="block text-sm font-bold text-slate-200 mb-2">                        Keterangan / Keperluan Tambahan
                     </label>
                     <textarea
                         id="keterangan"
                         name="keterangan"
                         rows="4"
-                        class="w-full border border-slate-300 rounded-2xl p-3.5 text-sm focus:outline-none focus:ring-4 focus:ring-academic-500/15 focus:border-academic-500 bg-white transition duration-200 shadow-2xs @error('keterangan') border-red-500 ring-2 ring-red-500/20 @enderror"
-                        placeholder="Contoh: Pengajuan surat aktif kuliah untuk keperluan kelengkapan beasiswa semester genap tahun akademik 2026/2027..."
+                        class="w-full border border-slate-700 rounded-2xl p-3.5 text-sm focus:outline-none focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 bg-[#020817] text-white transition duration-200 shadow-2xs @error('keterangan') border-red-500 ring-2 ring-red-500/20 @enderror"                        placeholder="Contoh: Pengajuan surat aktif kuliah untuk keperluan kelengkapan beasiswa semester genap tahun akademik 2026/2027..."
                     >{{ old('keterangan') }}</textarea>
                     <p class="text-xs text-slate-400 mt-2">Opsional: Tuliskan tujuan permohonan atau catatan spesifik untuk mempermudah Dosen PA meninjau berkas.</p>
                     @error('keterangan')
@@ -154,11 +147,10 @@
                 </div>
 
                 <!-- Actions dengan Click Animation -->
-                <div class="pt-5 border-t border-slate-100 flex items-center justify-end gap-3">
+                <div class="pt-5 border-t border-slate-800 flex items-center justify-end gap-3">
                     <a
                         href="{{ route('pengajuan.index') }}"
-                        class="px-5 py-3 rounded-2xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition active:scale-95 duration-150 cursor-pointer"
-                    >
+                        class="px-5 py-3 rounded-2xl border border-slate-700 text-sm font-semibold text-slate-300 hover:bg-slate-800 transition active:scale-95 duration-150 cursor-pointer"                    >
                         Batal
                     </a>
                     <button

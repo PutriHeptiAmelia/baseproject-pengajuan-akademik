@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\JenisLayanan;
 use App\Models\Pengajuan;
+use App\Models\StatusPengajuan;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -57,6 +60,50 @@ class PengajuanController extends Controller
         ]);
 
         return redirect()->route('pengajuan.index')->with('success', 'Pengajuan berhasil dikirim.');
+    }
+
+    public function ajukanUlang(Request $request, Pengajuan $pengajuan)
+    {
+        // Pastikan hanya pemilik pengajuan yang bisa ajukan ulang
+        if (Auth::id() !== $pengajuan->user_id) {
+            abort(403);
+        }
+
+        // Pastikan statusnya memang 'revisi'
+        if ($pengajuan->status->kode !== 'revisi') {
+            return back()->with('error', 'Pengajuan ini tidak dalam status revisi.');
+        }
+
+        // Cari ID status 'diajukan' atau 'menunggu_verifikasi_pa'
+        $statusDiajukan = StatusPengajuan::where('kode', 'diajukan')->first();
+
+        DB::beginTransaction();
+        try {
+            // Update status kembali ke diajukan
+            $pengajuan->update([
+                'status_pengajuan_id' => $statusDiajukan->id,
+                // Update keterangan kalau mahasiswa nambahin catatan baru
+                'keterangan' => $request->keterangan ?? $pengajuan->keterangan,
+            ]);
+
+            // Catat di riwayat status
+            DB::table('riwayat_status')->insert([
+                'pengajuan_id' => $pengajuan->id,
+                'status_lama_id' => $pengajuan->status_pengajuan_id,
+                'status_baru_id' => $statusDiajukan->id,
+                'diubah_oleh' => Auth::id(),
+                'catatan' => 'Mahasiswa mengajukan ulang setelah revisi',
+                'created_at' => now(),
+            ]);
+
+            DB::commit();
+
+            return back()->with('success', 'Pengajuan berhasil diajukan ulang! Menunggu verifikasi Dosen PA.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return back()->with('error', 'Terjadi kesalahan: '.$e->getMessage());
+        }
     }
 
     // Week 5: Menampilkan detail pengajuan via React
