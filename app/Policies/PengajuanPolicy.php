@@ -78,13 +78,12 @@ class PengajuanPolicy
      */
     public function approve(User $user, Pengajuan $pengajuan): bool
     {
-        // Dosen PA: approve pengajuan mahasiswa bimbingannya
+        // Dosen PA cuma bisa approve bimbingannya
         if ($user->role === 'dosen_pa') {
-            return $pengajuan->pemohon
-                && $pengajuan->pemohon->dosen_pa_id === $user->id;
+            return $pengajuan->pemohon->dosen_pa_id === $user->id;
         }
 
-        // Kaprodi & admin: boleh approve semua
+        // Kaprodi dan Admin boleh approve semua
         return in_array($user->role, ['kaprodi', 'admin']);
     }
 
